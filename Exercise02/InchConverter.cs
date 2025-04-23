@@ -14,5 +14,9 @@ namespace Exercise02{
         public static double FromMeter(double meter) {
             return meter / raito;
         }
+        //インチからメートルを求める
+        public static double FromInch(double meter) {
+            return meter * raito;
+        }
     }
 }
