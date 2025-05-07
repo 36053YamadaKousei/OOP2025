@@ -33,7 +33,7 @@
             //メートルからからインチへの対応表を出力
             for (int meter = start; meter <= end; meter++) {
                 double inch = InchConverter.FromInch(meter);
-                Console.WriteLine($"{meter}m = {inch:0.00}inch");
+                Console.WriteLine($"{meter}m = {inch:0.000}inch");
             }
         }
     }
