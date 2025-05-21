@@ -41,7 +41,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise4(List<int> numbers) {
-            
+            numbers.Select(n => n * 2).ToList().ForEach(Console.WriteLine);
         }
     }
 }
