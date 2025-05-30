@@ -22,8 +22,11 @@ namespace Exercise03 {
         }
 
         private static void Exercise1(string text) {
-            var count = text.Count(Char.IsWhiteSpace);
-            Console.WriteLine("空白数:"+count);
+            var spases = text.Count(c => c == ' ');
+            Console.WriteLine("空白数:{0}" + spases);
+
+            //var count = text.Count(Char.IsWhiteSpace);  別解
+            //Console.WriteLine("空白数:"+count);
         }
 
         private static void Exercise2(string text) {
@@ -36,11 +39,15 @@ namespace Exercise03 {
         }
 
         private static void Exercise4(string text) {
-            
+            var count = text.Split(' ').Length;
+            Console.WriteLine("単語数:{0}"+count);
         }
 
         private static void Exercise5(string text) {
-            
+            var words = text.Split(' ').Where(s=>s.Length<=4);
+            foreach (var word in words) {
+                Console.WriteLine(word);
+            }
         }
     }
 }
