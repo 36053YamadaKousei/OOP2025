@@ -23,7 +23,7 @@ namespace Exercise03 {
 
         private static void Exercise1(string text) {
             var count = text.Count(Char.IsWhiteSpace);
-            Console.WriteLine(count);
+            Console.WriteLine("空白数:"+count);
         }
 
         private static void Exercise2(string text) {
