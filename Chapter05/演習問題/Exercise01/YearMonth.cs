@@ -23,12 +23,13 @@ namespace Exercise01{
         //5.1.3
         public YearMonth AddOneMonth() {
             if (Month == 12) {
-                return new YearMonth(Year,+1);
+                return new YearMonth(Year + 1,1);//12月
             } else {
-                return new YearMonth(Month,+1);
+                return new YearMonth(Year, Month + 1);//12月以外
             }
         }
-
         //5.1.4
+        
+        
     }
 }
