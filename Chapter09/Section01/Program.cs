@@ -6,7 +6,6 @@ namespace Section01 {
             var today = new DateTime(2025,7,12);//日付
             var now = DateTime.Now;
 
-            
             Console.WriteLine($"Today:{today.Month}");
             Console.WriteLine($"Now:{now}");
 
@@ -23,16 +22,24 @@ namespace Section01 {
             var day = int.Parse(Console.ReadLine());
 
             //平成○○年○月○日は○曜日です　←曜日は漢字で（P202）
-            var date = new DateTime(year,month,day);
+            var dateOfBirth = new DateTime(year,month,day);
             var culture = new CultureInfo("ja-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var str = date.ToString("ggyy年M月d日", culture);
-            var dayOfWeek = culture.DateTimeFormat.GetDayName(date.DayOfWeek);
+            var str = dateOfBirth.ToString("ggyy年M月d日", culture);
+            var dayOfWeek = culture.DateTimeFormat.GetDayName(dateOfBirth.DayOfWeek);
+
             Console.WriteLine($"{str}は{dayOfWeek}");
-            
 
             //②うるう年の判定プログラムを作成する
-            
+            Console.Write("西暦：");
+            var leapyear = int.Parse(Console.ReadLine());
+            var isLeapYear = DateTime.IsLeapYear(leapyear);
+
+            if (isLeapYear) {
+                Console.WriteLine("閏年です");
+            } else {
+                Console.WriteLine("閏年ではありません");
+            }
         }
     }
 }
