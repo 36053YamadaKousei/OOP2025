@@ -54,8 +54,12 @@ namespace Section01 {
                 Console.WriteLine("閏年ではありません");
             }
         }
-        static int GetAge(DateTime dateOfBirth,DateTime targetDay) {
-
+        static int GetAge(DateTime birthday, DateTime targetDay) {
+            var age = targetDay.Year - birthday.Year;
+            if (targetDay < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
