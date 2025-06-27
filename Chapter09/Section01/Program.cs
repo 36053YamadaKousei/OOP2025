@@ -3,10 +3,9 @@
 namespace Section01 {
     internal class Program {
         static void Main(string[] args) {
-            var today = new DateTime(2025,7,12);//日付
+            
             var now = DateTime.Now;
 
-            Console.WriteLine($"Today:{today.Month}");
             Console.WriteLine($"Now:{now}");
 
             //①自分の生年月日は何曜日をプログラムを書いて調べる
@@ -28,7 +27,21 @@ namespace Section01 {
             var str = dateOfBirth.ToString("ggyy年M月d日", culture);
             var dayOfWeek = culture.DateTimeFormat.GetDayName(dateOfBirth.DayOfWeek);
 
-            Console.WriteLine($"{str}は{dayOfWeek}");
+            Console.WriteLine($"{str}は{dayOfWeek}です");
+
+            //③生まれてから○○○○日目です
+            TimeSpan diff = now - dateOfBirth;
+            Console.WriteLine($"生まれてから{diff.Days}日目です");
+
+            //④あなたは○○歳です！
+            int age = GetAge(dateOfBirth, DateTime.Today);
+            Console.WriteLine(age + "歳");
+
+
+            //⑤１月１日から何日目か？
+            var today = DateTime.Today;
+            int dayOfYear = today.DayOfYear;
+            Console.WriteLine(dayOfYear);
 
             //②うるう年の判定プログラムを作成する
             Console.Write("西暦：");
@@ -40,6 +53,9 @@ namespace Section01 {
             } else {
                 Console.WriteLine("閏年ではありません");
             }
+        }
+        static int GetAge(DateTime dateOfBirth,DateTime targetDay) {
+
         }
     }
 }
