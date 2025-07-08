@@ -50,9 +50,25 @@
             btRecordDelete = new Button();
             ofdPicFileOpen = new OpenFileDialog();
             btNewRecord = new Button();
+            ssMessageArea = new StatusStrip();
+            tsslbMessage = new ToolStripStatusLabel();
+            menuStrip1 = new MenuStrip();
+            toolStripMenuItem1 = new ToolStripMenuItem();
+            tstOpen = new ToolStripTextBox();
+            tstSave = new ToolStripTextBox();
+            tstColor = new ToolStripTextBox();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tstEnd = new ToolStripTextBox();
+            toolStripMenuItem2 = new ToolStripMenuItem();
+            tstAbout = new ToolStripTextBox();
+            cdColor = new ColorDialog();
+            sfdReportFileSave = new SaveFileDialog();
+            ofdReportFileOpen = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecord).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
+            ssMessageArea.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -320,7 +336,7 @@
             // btNewRecord
             // 
             btNewRecord.FlatStyle = FlatStyle.Flat;
-            btNewRecord.Location = new Point(355, 47);
+            btNewRecord.Location = new Point(397, 53);
             btNewRecord.Name = "btNewRecord";
             btNewRecord.Size = new Size(87, 55);
             btNewRecord.TabIndex = 16;
@@ -328,11 +344,94 @@
             btNewRecord.UseVisualStyleBackColor = true;
             btNewRecord.Click += btNewRecord_Click;
             // 
+            // ssMessageArea
+            // 
+            ssMessageArea.Items.AddRange(new ToolStripItem[] { tsslbMessage });
+            ssMessageArea.Location = new Point(0, 578);
+            ssMessageArea.Name = "ssMessageArea";
+            ssMessageArea.Size = new Size(800, 22);
+            ssMessageArea.TabIndex = 17;
+            ssMessageArea.Text = "statusStrip1";
+            // 
+            // tsslbMessage
+            // 
+            tsslbMessage.Name = "tsslbMessage";
+            tsslbMessage.Size = new Size(0, 17);
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2 });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 18;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { tstOpen, tstSave, tstColor, toolStripSeparator1, tstEnd });
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(67, 20);
+            toolStripMenuItem1.Text = "ファイル(F)";
+            // 
+            // tstOpen
+            // 
+            tstOpen.Name = "tstOpen";
+            tstOpen.Size = new Size(100, 23);
+            tstOpen.Text = "開く...";
+            tstOpen.Click += tstOpen_Click;
+            // 
+            // tstSave
+            // 
+            tstSave.Name = "tstSave";
+            tstSave.Size = new Size(100, 23);
+            tstSave.Text = "保存...";
+            tstSave.Click += tstSave_Click;
+            // 
+            // tstColor
+            // 
+            tstColor.Name = "tstColor";
+            tstColor.Size = new Size(100, 23);
+            tstColor.Text = "色設定...";
+            tstColor.Click += toolStripTextBox3_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(177, 6);
+            // 
+            // tstEnd
+            // 
+            tstEnd.Name = "tstEnd";
+            tstEnd.Size = new Size(100, 23);
+            tstEnd.Text = "終了";
+            tstEnd.Click += tstEnd_Click;
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.DropDownItems.AddRange(new ToolStripItem[] { tstAbout });
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(65, 20);
+            toolStripMenuItem2.Text = "ヘルプ(H)";
+            // 
+            // tstAbout
+            // 
+            tstAbout.Name = "tstAbout";
+            tstAbout.Size = new Size(100, 23);
+            tstAbout.Text = "このアプリについて...";
+            tstAbout.Click += toolStripTextBox4_Click;
+            // 
+            // ofdReportFileOpen
+            // 
+            ofdReportFileOpen.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 577);
+            ClientSize = new Size(800, 600);
+            Controls.Add(ssMessageArea);
+            Controls.Add(menuStrip1);
             Controls.Add(btNewRecord);
             Controls.Add(btPicDelete);
             Controls.Add(btRecordDelete);
@@ -353,6 +452,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
@@ -360,6 +460,10 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecord).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
+            ssMessageArea.ResumeLayout(false);
+            ssMessageArea.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -393,5 +497,19 @@
         private Button btRecordDelete;
         private OpenFileDialog ofdPicFileOpen;
         private Button btNewRecord;
+        private StatusStrip ssMessageArea;
+        private ToolStripStatusLabel tsslbMessage;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripTextBox tstOpen;
+        private ToolStripTextBox tstSave;
+        private ToolStripTextBox tstAbout;
+        private ToolStripTextBox tstColor;
+        private ToolStripTextBox tstEnd;
+        private ColorDialog cdColor;
+        private ToolStripSeparator toolStripSeparator1;
+        private SaveFileDialog sfdReportFileSave;
+        private OpenFileDialog ofdReportFileOpen;
     }
 }
