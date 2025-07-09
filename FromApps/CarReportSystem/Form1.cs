@@ -146,10 +146,17 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+
             InputItemsAllClear();
 
             //交互に色を設定（データグリッドビュー）
             dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+
+            //設定ファイルを読み込み背景色を設定（逆シリアル化）
+            //P284参考
+
+
+
 
         }
 
@@ -162,6 +169,8 @@ namespace CarReportSystem {
         private void toolStripTextBox3_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;//色設定
+                //設定ファイルへ保存
+                
             }
         }
 
@@ -219,7 +228,7 @@ namespace CarReportSystem {
                     tsslbMessage.Text = "ファイル書き出しエラー";
                     MessageBox.Show(ex.Message);//より具体的なエラー出力
                 }
-
+                
 
             }
         }
