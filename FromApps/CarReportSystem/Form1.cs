@@ -1,11 +1,16 @@
 using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
+using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        //設定クラスのインスタンスを生成
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -153,13 +158,24 @@ namespace CarReportSystem {
             dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
             //設定ファイルを読み込み背景色を設定（逆シリアル化）
-            //P284参考
+            //P286参考(setting.xml)
+            if (File.Exists("setting.xml")) {
+                try {
+                    using (var reader = XmlReader.Create("setting.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        var set = serializer.Deserialize(reader) as Settings;
+                        BackColor = Color.FromArgb(set.MainFormBackColor);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);//より具体的なエラー出力
+                }
 
-
-
-
+            } else {
+                tsslbMessage.Text = "設定ファイルがありません";
+            }
         }
-
 
         private void toolStripTextBox4_Click(object sender, EventArgs e) {
             fmVersion fmv = new fmVersion();
@@ -170,7 +186,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;//色設定
                 //設定ファイルへ保存
-                
+                settings.MainFormBackColor = cdColor.Color.ToArgb();
             }
         }
 
@@ -239,6 +255,22 @@ namespace CarReportSystem {
 
         private void tstOpen_Click(object sender, EventArgs e) {
             reportOpenFile();
+        }
+
+        private void Form1_FromClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルへ色情報を保存する処理（シリアル化）
+            //P284参考(setting.xml)
+            try {
+                using (var writer = XmlWriter.Create("setting.xml")) {
+                    var serializer = new XmlSerializer(settings.GetType());
+                    serializer.Serialize(writer, settings);
+                }
+            }
+            catch (Exception ex) {
+                tsslbMessage.Text = "ファイル書き出しエラー";
+                MessageBox.Show(ex.Message);//より具体的なエラー出力
+            }
+            
         }
     }
 }
