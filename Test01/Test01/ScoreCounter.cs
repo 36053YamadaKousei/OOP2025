@@ -4,21 +4,21 @@
 
         // コンストラクタ
         public ScoreCounter(string filePath) {
-            _score = ReadScores(filePath);
+            _score = ReadScore(filePath);
         }
 
         //メソッドの概要： 生徒のスコアを読み込み、Studentオブジェクトのリストを返す
-        private static IEnumerable<Student> ReadScores(string filePath) {
+        private static IEnumerable<Student> ReadScore(string filePath) {
             var scores = new List<Student>();
             var lines = File.ReadAllLines(filePath);
             foreach (var line in lines) {
                 var items = line.Split(',');
-                var score = new Student {
+                Student student = new Student() {
                     Name = items[1],
                     Subject = items[2],
                     Score = int.Parse(items[2])
                 };
-                scores.Add(score);
+                scores.Add(student);
             }
         }
 

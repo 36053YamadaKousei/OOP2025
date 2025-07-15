@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace CarReportSystem{
-    //設定した色情報を格納
-    class Settings{
-        [XmlIgnore]
-        public int MainFormBackColor { get; set; }
-        
+    
+    public class Settings{
+        private static Settings instance; //自分自身のインスタンスを格納
 
+        //設定した色情報を格納
+        public int MainFormBackColor { get; set; }
+
+        //コンストラクタ(privateにすることによりnewできなくなる)
+        private Settings() { }
+
+        public Settings getInstance() {
+            if(instance == null) {
+                instance = new Settings();
+            }
+            return instance;
+        }
     }
 }
