@@ -14,12 +14,13 @@
             foreach (var line in lines) {
                 var items = line.Split(',');
                 Student student = new Student() {
-                    Name = items[1],
-                    Subject = items[2],
+                    Name = items[0],
+                    Subject = items[1],
                     Score = int.Parse(items[2])
                 };
                 scores.Add(student);
             }
+            return scores;
         }
 
         //メソッドの概要： 生徒別にスコアを求める
