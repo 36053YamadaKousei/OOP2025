@@ -159,6 +159,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GrayText;
             ClientSize = new Size(837, 740);
             Controls.Add(btDelete);
             Controls.Add(btRegistration);

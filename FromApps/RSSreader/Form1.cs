@@ -30,6 +30,7 @@ namespace RssReader {
             using (var hc = new HttpClient()) {
 
 
+                
                 string xml = await hc.GetStringAsync(getRssUrl(cbUrl.Text));
                 XDocument xdoc = XDocument.Parse(xml);
 
@@ -68,21 +69,22 @@ namespace RssReader {
         private void btGoForward_Click(object sender, EventArgs e) {
             wvRssLink.GoForward();
         }
-
-        private void wvRssLink_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e) {
+        //マスク処理
+        private void GoFowardBtEnableSet() {
             btGoBack.Enabled = wvRssLink.CanGoBack;
             btGoForward.Enabled = wvRssLink.CanGoForward;
         }
 
-        
+        private void wvRssLink_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e) {
+            GoFowardBtEnableSet();
+        }
 
         private void Form1_Load(object sender, EventArgs e) {
             cbUrl.DataSource = rssUrlDict.Select(k => k.Key).ToList();
 
             cbUrl.SelectedIndex = -1;//起動時にコンボボックスが空欄
 
-            btGoBack.Enabled = wvRssLink.CanGoBack;
-            btGoForward.Enabled = wvRssLink.CanGoForward;
+            GoFowardBtEnableSet();//起動時にマスク処理
         }
 
         private void btRegistration_Click(object sender, EventArgs e) {
@@ -141,5 +143,8 @@ namespace RssReader {
             //文字を描画
             e.Graphics.DrawString(txt, fnt, bsh, bnd);
         }
+
+
+
     }
 }
