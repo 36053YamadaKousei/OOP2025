@@ -20,8 +20,6 @@ namespace RssReader {
             {"地域","https://news.yahoo.co.jp/rss/topics/local.xml"}
         };
 
-        
-
 
         public Form1() {
             InitializeComponent();
@@ -57,6 +55,7 @@ namespace RssReader {
             return str;
         }
 
+        //タイトルを選択したときに呼ばれるイベントハンドラ
         private void lbTitles_Click(object sender, EventArgs e) {
             wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex].Link);
         }
@@ -75,10 +74,72 @@ namespace RssReader {
             btGoForward.Enabled = wvRssLink.CanGoForward;
         }
 
+        
+
         private void Form1_Load(object sender, EventArgs e) {
             cbUrl.DataSource = rssUrlDict.Select(k => k.Key).ToList();
 
-            
+            cbUrl.SelectedIndex = -1;//起動時にコンボボックスが空欄
+
+            btGoBack.Enabled = wvRssLink.CanGoBack;
+            btGoForward.Enabled = wvRssLink.CanGoForward;
+        }
+
+        private void btRegistration_Click(object sender, EventArgs e) {
+            string url = tbFavorite.Text.Trim();
+            if (string.IsNullOrEmpty(url)) {
+                MessageBox.Show("登録するURLを入力してください");
+                return;
+            }
+
+            if (cbUrl.Items.Contains(url)) {
+                cbUrl.Items.Add(url);
+                MessageBox.Show("お気に入り登録しました");
+            } else {
+                MessageBox.Show("すでに登録されています");
+            }
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            if (cbUrl.SelectedItem == null) {
+                MessageBox.Show("削除するURLを選択してください");
+                return;
+            }
+            string url = cbUrl.SelectedItem.ToString();
+            if (MessageBox.Show($"「{url}」を削除しますか？",
+                "確認", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                cbUrl.Items.Remove(url);
+                if (cbUrl.Items.Count > 0) {
+                    cbUrl.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void lbTitles_DrawItem(object sender, DrawItemEventArgs e) {
+            var idx = e.Index;                                                      //描画対象の行
+            if (idx == -1) return;                                                  //範囲外なら何もしない
+            var sts = e.State;                                                      //セルの状態
+            var fnt = e.Font;                                                       //フォント
+            var _bnd = e.Bounds;                                                    //描画範囲(オリジナル)
+            var bnd = new RectangleF(_bnd.X, _bnd.Y, _bnd.Width, _bnd.Height);     //描画範囲(描画用)
+            var txt = (string)lbTitles.Items[idx];                                  //リストボックス内の文字
+            var bsh = new SolidBrush(lbTitles.ForeColor);                           //文字色
+            var sel = (DrawItemState.Selected == (sts & DrawItemState.Selected));   //選択行か
+            var odd = (idx % 2 == 1);                                               //奇数行か
+            var fore = Brushes.WhiteSmoke;                                         //偶数行の背景色
+            var bak = Brushes.AliceBlue;                                           //奇数行の背景色
+
+            e.DrawBackground();                                                     //背景描画
+
+            //奇数項目の背景色を変える（選択行は除く）
+            if (odd && !sel) {
+                e.Graphics.FillRectangle(bak, bnd);
+            } else if (!odd && !sel) {
+                e.Graphics.FillRectangle(fore, bnd);
+            }
+
+            //文字を描画
+            e.Graphics.DrawString(txt, fnt, bsh, bnd);
         }
     }
 }
