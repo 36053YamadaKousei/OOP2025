@@ -22,7 +22,7 @@ namespace ColorChecker
     public partial class MainWindow : Window{
 
         Color loadColor = Color.FromRgb(0, 0, 0);//起動時の色
-        //MyColor currentColor; //現在設定している色情報
+        MyColor currentColor; //現在設定している色情報
 
         public MainWindow(){
             InitializeComponent();
@@ -45,6 +45,8 @@ namespace ColorChecker
             Brush brush = new SolidColorBrush(color);
             colorArea.Background = brush;
         }
+
+
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
             byte r = (byte)rSlider.Value;
