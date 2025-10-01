@@ -18,11 +18,30 @@ namespace ConverterApp
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+    public partial class MainWindow : Window{
+
+
+
+        public MainWindow(){
             InitializeComponent();
+            //ComboBoxに単位を追加
+            MetricUnit.Items.Add("mm");
+            MetricUnit.Items.Add("cm");
+            MetricUnit.Items.Add("m");
+            MetricUnit.Items.Add("km");
+
+            ImperialUnit.Items.Add("in");
+            ImperialUnit.Items.Add("ft");
+            ImperialUnit.Items.Add("yd");
+            ImperialUnit.Items.Add("ml");
+        }
+
+        private void ImperialUnitToMetric_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void MetricToImperialUnit_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
