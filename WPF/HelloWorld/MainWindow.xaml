@@ -13,10 +13,17 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <TextBlock Text="{Binding GreetingMesage}"/>
-        <Button Content="ChangeMesage" Grid.Row="1" Command="{Binding ChangeMesageCommand}"/>
-
+        <TextBlock Text="{Binding GreetingMessage}"/>
+        <Button Content="ChangeMesage" Grid.Row="1" 
+                Command="{Binding ChangeMessageCommand}"
+                CommandParameter="{Binding NewMessage1}"
+                IsEnabled="{Binding CanChangeMessage}"/>
+        
+        <Button Content="ChangeMesage" Grid.Row="2" 
+                Command="{Binding ChangeMessageCommand}"
+                CommandParameter="{Binding NewMessage2}"/>
     </Grid>
 </Window>
