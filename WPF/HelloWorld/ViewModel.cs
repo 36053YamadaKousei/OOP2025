@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HelloWorld{
-    class ViewModel : INotifyPropertyChanged{
+    class ViewModel :　BindableBase{
 
         public ViewModel() {
             ChangeMesageCommand = new DelegateCommand(
@@ -17,17 +18,10 @@ namespace HelloWorld{
         private string _greetingMesage = "Hello World!";
         public string GreetingMesage {
             get => _greetingMesage;
-            set {
-                if (_greetingMesage != value) {
-                    _greetingMesage = value;
-                    PropertyChanged?.Invoke(
-                        this, new PropertyChangedEventArgs(nameof(GreetingMesage)));
-                }
-            }
+            set => SetProperty(ref _greetingMesage, value);
+                
         }
 
         public DelegateCommand ChangeMesageCommand { get; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
