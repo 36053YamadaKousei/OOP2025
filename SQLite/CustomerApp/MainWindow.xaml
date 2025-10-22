@@ -34,7 +34,44 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1" Margin="5"/>
         </Grid>
-
         
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="画像" x:Name="ImageButton" Margin="10"/>
+            <Image Grid.Column="1" x:Name="CustomerImage" Margin="10"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="保存" x:Name="SaveButton" Margin="5"/>
+                <Button Grid.Column="1" Content="更新" x:Name="UpdateButton" Margin="5"/>
+                <Button Grid.Column="2" Content="削除" x:Name="DeleteButton" Margin="5"/>
+            </Grid>
+            <TextBox Grid.Row="1" x:Name="SearchTextBox" Margin="5" FontSize="20"/>
+        </Grid>
+        <ListView Grid.Row="3" x:Name="CustomerListView" Margin="5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" FontSize="20"/>
+                        <TextBlock Text="{Binding Phone}"/>
+                        <TextBlock Text="{Binding Address}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

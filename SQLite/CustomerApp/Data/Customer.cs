@@ -1,9 +1,11 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace CustomerApp.Data{
     internal class Customer{
@@ -24,7 +26,20 @@ namespace CustomerApp.Data{
         /// <summary>
         /// 画像
         /// </summary>
-        public string Picture { get; set; }
+        public byte[] Picture { get; set; }
 
+        public BitmapImage PictureImage {
+            get {
+                if (Picture == null) return null;
+                using (var ms = new MemoryStream(Picture)) {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    return image;
+                }
+            }
+        }
     }
 }
