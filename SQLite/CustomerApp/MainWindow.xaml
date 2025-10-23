@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CustomerApp"
+        xmlns:local="clr-namespace:CustomerApp" SizeToContent="Height"
         mc:Ignorable="d"
-        Title="顧客管理アプリケーション" Height="450" Width="300">
+        Title="顧客管理アプリケーション" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -40,13 +40,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="画像" x:Name="ImageButton" Margin="10"/>
+            <Button Grid.Column="0" Content="画像" x:Name="ImageButton" Margin="10" Click="ImageButton_Click"/>
             <Image Grid.Column="1" x:Name="CustomerImage" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="2">
             
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -56,13 +57,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="保存" x:Name="SaveButton" Margin="5"/>
-                <Button Grid.Column="1" Content="更新" x:Name="UpdateButton" Margin="5"/>
-                <Button Grid.Column="2" Content="削除" x:Name="DeleteButton" Margin="5"/>
+                <Button Grid.Column="0" Content="保存" x:Name="SaveButton" Margin="5" Click="SaveButton_Click"/>
+                <Button Grid.Column="1" Content="更新" x:Name="UpdateButton" Margin="5" Click="UpdateButton_Click"/>
+                <Button Grid.Column="2" Content="削除" x:Name="DeleteButton" Margin="5" Click="DeleteButton_Click"/>
             </Grid>
-            <TextBox Grid.Row="1" x:Name="SearchTextBox" Margin="5" FontSize="20"/>
+            <TextBlock Grid.Row="1" Text="検索" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBox Grid.Row="2" x:Name="SearchTextBox" Margin="5" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
         </Grid>
-        <ListView Grid.Row="3" x:Name="CustomerListView" Margin="5">
+        <ListView Grid.Row="3" x:Name="CustomerListView" Margin="5"  SelectionChanged="CustomerListView_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
