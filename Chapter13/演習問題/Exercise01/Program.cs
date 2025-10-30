@@ -26,7 +26,16 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_3() {
-            
+            var results = Library
+                .Books.GroupBy(b => b.PublishedYear)
+                .OrderBy(b => b.Key)
+                .Select(b => new {
+                    PublishedYear = b.Key,
+                    Count = b.Count(),
+                });
+            foreach (var item in results) {
+                Console.WriteLine($"{item.PublishedYear}:{item.Count}");
+            }
         }
 
         private static void Exercise1_4() {
@@ -92,15 +101,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_8() {
-            var groups = Library.Categories
+            var CategoryNames = Library.Categories
                 .GroupJoin(Library.Books,
                     c => c.Id,
                     b => b.PublishedYear,
                     (c, books) => new {
-                        Categories = c.Name,
-                        Books = books,
-                    });
-            
+                        CategoryName= c.Name,
+                        Count = books.Count(),
+                    })
+                .Where(x=>x.Count >= 4)
+                .Select(x=>x.CategoryName);
+            foreach (var name in CategoryNames) {
+                Console.WriteLine(name);
+            }
         }
     }
 }
