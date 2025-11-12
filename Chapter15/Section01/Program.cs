@@ -1,9 +1,9 @@
 ﻿namespace Section01 {
     internal class Program {
         static void Main(string[] args) {
-            List<GreetingBase> list = new List<GreetingBase> {
+            List<IGreeting> list = new List<GreetingBase> {
                 new GreetingMorning(),
-                new GreetingEvening(),
+                new GreetingAfternoon(),
                 new GreetingEvening(),
             };
 
