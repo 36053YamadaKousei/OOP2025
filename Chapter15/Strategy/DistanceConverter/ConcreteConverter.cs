@@ -33,4 +33,18 @@ namespace DistanceConverter {
         protected override double Raito => 0.9144;
         public override string UnitName => "ヤード";
     }
+    public class MileConverter : ConverterBase {
+        public override bool IsMyUnit(string name) =>
+            name.ToLower() == "mile" || name == UnitName;
+
+        protected override double Raito => 1609.34;
+        public override string UnitName => "マイル";
+    }
+    public class KiloMeterConverter : ConverterBase {
+        public override bool IsMyUnit(string name) =>
+            name.ToLower() == "kilometer" || name == UnitName;
+
+        protected override double Raito => 1000;
+        public override string UnitName => "キロメートル";
+    }
 }
