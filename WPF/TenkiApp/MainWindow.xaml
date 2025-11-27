@@ -1,12 +1,77 @@
 ﻿<Window x:Class="TenkiApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TenkiApp"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="天気アプリ" Width="900" Height="1000"
+        WindowStartupLocation="CenterScreen" Background="#e6f7ff">
 
+    <Grid>
+        <!-- 中央に配置するスタイル -->
+        <Border CornerRadius="20" Background="White" Padding="30" Margin="20">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                <!-- アプリタイトル -->
+                <TextBlock Text="🌞 1週間の天気予報 🌧️" HorizontalAlignment="Center"
+                           FontSize="28" Foreground="#333" FontWeight="Bold"
+                           Margin="0 0 30 0" FontFamily="Segoe UI" />
+
+                <!-- 都市選択のComboBox -->
+                <ComboBox x:Name="CityComboBox" Width="250" Height="40" Margin="0 10 0 20"
+                          FontSize="16" HorizontalAlignment="Center" SelectionChanged="CityComboBox_SelectionChanged"
+                          Background="#cce7ff" BorderBrush="#007acc" BorderThickness="2" 
+                          FontFamily="Segoe UI">
+                    <ComboBoxItem Content="東京" />
+                    <ComboBoxItem Content="大阪" />
+                    <ComboBoxItem Content="名古屋" />
+                    <ComboBoxItem Content="札幌" />
+                    <ComboBoxItem Content="福岡" />
+                    <ComboBoxItem Content="京都" />
+                </ComboBox>
+
+                <!-- 都市名表示 -->
+                <TextBlock x:Name="CityNameText" HorizontalAlignment="Center" FontSize="20" Foreground="#333" Margin="0 10"/>
+
+                <!-- 天気情報 -->
+                <TextBlock x:Name="WeatherInfoText" HorizontalAlignment="Center" FontSize="18" Foreground="#555" Margin="0 10"/>
+
+                <!-- 1週間の天気予報グラフ -->
+                <lvc:CartesianChart Name="WeatherChart" Width="600" Height="350" Margin="0 20 0 0">
+                    <lvc:CartesianChart.Series>
+                        <!-- 最高気温 -->
+                        <lvc:LineSeries Title="最高気温"
+                                        Values="{Binding MaxTemperatures}"
+                                        PointGeometrySize="8"
+                                        Fill="Transparent"
+                                        Stroke="Red"
+                                        StrokeThickness="4"
+                                        LineSmoothness="0.3" />
+                        <!-- 最低気温 -->
+                        <lvc:LineSeries Title="最低気温"
+                                        Values="{Binding MinTemperatures}"
+                                        PointGeometrySize="8"
+                                        Fill="Transparent"
+                                        Stroke="Blue"
+                                        StrokeThickness="4"
+                                        LineSmoothness="0.3" />
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="日付" Labels="{Binding Dates}" FontSize="14" FontFamily="Segoe UI" />
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="温度 (℃)" MinValue="0" MaxValue="40" FontSize="14" FontFamily="Segoe UI" />
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+
+                <!-- 日ごとの天気情報表示 -->
+                <DataGrid x:Name="WeatherDataGrid" Width="800" Height="250" Margin="0 20 0 0" AutoGenerateColumns="True" 
+                          IsReadOnly="True" ItemsSource="{Binding WeatherDays}" 
+                          FontFamily="Segoe UI" Background="#f0f8ff" BorderBrush="#007acc" BorderThickness="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="日付" Binding="{Binding Date}" Width="*" />
+                        <DataGridTextColumn Header="最高気温(℃)" Binding="{Binding MaxTemperature}" Width="*" />
+                        <DataGridTextColumn Header="最低気温(℃)" Binding="{Binding MinTemperature}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

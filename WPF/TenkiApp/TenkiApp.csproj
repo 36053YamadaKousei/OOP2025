@@ -8,4 +8,25 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\weather\cloud.png" />
+    <None Remove="Assets\weather\rain.png" />
+    <None Remove="Assets\weather\snow.png" />
+    <None Remove="Assets\weather\sun.png" />
+    <None Remove="Assets\weather\thunder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\weather\cloud.png" />
+    <Resource Include="Assets\weather\rain.png" />
+    <Resource Include="Assets\weather\snow.png" />
+    <Resource Include="Assets\weather\sun.png" />
+    <Resource Include="Assets\weather\thunder.png" />
+  </ItemGroup>
+
 </Project>
